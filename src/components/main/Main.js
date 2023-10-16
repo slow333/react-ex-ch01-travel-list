@@ -5,7 +5,6 @@ function Main({sortedList, setSortedList, handleChange, clearList}) {
   const [isChecked, setIsChecked] = useState(false)
   const [sort, setSort] = useState("")
 
-  // <Main sortedList={sortedList} setSortedList={setSortedList} handleChange={handleChange} clearList={clearList}/>
   const deleteItem = (event) => {
     setSortedList(prevState =>
       prevState.filter(item => item.id !== parseInt(event.target.value)))
@@ -25,25 +24,6 @@ function Main({sortedList, setSortedList, handleChange, clearList}) {
   }
 
   const lineThrough = (item) => checkedList.includes(item) ? {textDecoration: 'line-through'} : {}
-
-  // const clearList = () => {
-  //   setSortedList([])
-  // }
-  //
-  // const handleChange = (e) => {
-  //   const newList = sortedList.sort(function (a, b) {
-  //     if(a.description.toUpperCase() < b.description.toUpperCase()
-  //       || parseInt(a.quantity) < parseInt(b.quantity)){
-  //       return -1;
-  //     }
-  //     if(a.description.toUpperCase() > b.description.toUpperCase()
-  //       || parseInt(a.quantity) > parseInt(b.quantity)){
-  //       return 1;
-  //     }
-  //     return 0;
-  //   })
-  //     setSortedList([...newList])
-  // }
 
   return (
     <div className='list'>

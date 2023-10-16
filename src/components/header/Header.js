@@ -38,7 +38,6 @@ function Header({items, setItems}) {
                  name='description' placeholder='item...'/>
           <button>ADD</button>
         </form>
-
       </div>
     </div>
   );
