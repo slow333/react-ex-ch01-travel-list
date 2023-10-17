@@ -1,7 +1,10 @@
-function Footer() {
+function Footer({itemList, checkedList}) {
+  const item = itemList.length
+  const checked = itemList.filter(item => item.packed === true).length
   return (
     <div className='stats'>
-      <div>You have 4 items on your list, adn you already packed 2(50%)</div>
+      <div> You have {item} items on your list,
+        and you already packed {checked}({checked/item * 100}%)</div>
     </div>
   );
 }

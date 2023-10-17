@@ -1,47 +1,17 @@
-import {useState} from "react";
-
-function Main({sortedList, setSortedList, handleChange, clearList}) {
-  const [checkedList, setCheckedList] = useState([]);
-  const [isChecked, setIsChecked] = useState(false)
-  const [sort, setSort] = useState("")
-
-  const deleteItem = (event) => {
-    setSortedList(prevState =>
-      prevState.filter(item => item.id !== parseInt(event.target.value)))
-  }
-  const checkedItemHandler = (value, isChecked) => {
-    if (isChecked) {
-      setCheckedList((prev) => [...prev, value]);
-    }
-    if (!isChecked && checkedList.includes(value)) {
-      setCheckedList(checkedList.filter((item) => item !== value));
-    }
-  };
-
-  const checkHandled = (e, value) => {
-    setIsChecked(!isChecked)
-    checkedItemHandler(value, e.target.checked)
-  }
-
-  const lineThrough = (item) => checkedList.includes(item) ? {textDecoration: 'line-through'} : {}
-
+function Main({ sortedList, onDelete,
+                onSortedItem, clearList,
+                onToggleItem, sort}) {
   return (
-    <div className='list'>
-      {sortedList.map(item =>
-        <ul key={item.description}>
-          {!item.packed && <li>
-            <input type='checkbox' checked={checkedList.includes(item)}
-                   onChange={e => checkHandled(e, item)} />
-            <span style={lineThrough(item)} >
-              {item.quantity} {item.description}</span>
-            <button onClick={(event) => deleteItem(event)}
-                    value={item.id}>❌</button>
-          </li>}
-      </ul>)}
+    <div  className='list' >
       <ul>
+      {sortedList.map(item =>
+        <Items item={item}
+               onToggleItem={onToggleItem}
+               onDelete={onDelete}
+               key={item.description}/> )}
       </ul>
       <div className='actions'>
-        <select onChange={handleChange} value={sort}>
+        <select onChange={(e) => onSortedItem(e)} value={sort}>
           <option value="">sort by packed status</option>
           <option value="description">description</option>
           <option value="quantity">quantity</option>
@@ -52,4 +22,17 @@ function Main({sortedList, setSortedList, handleChange, clearList}) {
   );
 }
 
+function Items({item, onToggleItem, onDelete}) {
+  return (
+    <li >
+      <input type='checkbox' value={item.packed}
+             onChange={() => onToggleItem(item.id)} />
+      <span style={item.packed ? {textDecoration: 'line-through'} : {}} >
+            {item.quantity} {item.description}
+      </span>
+      <button onClick={() => onDelete(item.id)}>
+        ❌</button>
+    </li>
+  )
+}
 export default Main
