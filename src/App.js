@@ -1,9 +1,9 @@
-import AccordionApp from "./accordion/AccordionApp";
+import EatAndSplitApp from "./eatAndSplit/EatAndSplitApp";
 
 function App() {
   return (
     <div>
-      <AccordionApp />
+      <EatAndSplitApp />
     </div>
   );
 }
