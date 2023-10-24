@@ -46,12 +46,12 @@ function EatAndSplitApp() {
         />
       </div>
       {selectedFriend &&
-      <EatAndSplitForm
-        selectedFriend={selectedFriend}
-        onSplitBill={handleSpiltBill}
+           <EatAndSplitForm
+                selectedFriend={selectedFriend}
+                onSplitBill={handleSpiltBill}
+                key={selectedFriend.id}
       /> }
     </div>
-
   );
 }
 
